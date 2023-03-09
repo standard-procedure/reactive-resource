@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    command: "bundle exec rails spec"
+    volumes:
+      - .:/usr/src/app/
+      - bundle:/usr/local/bundle
+      - node_modules:/usr/lib/node_modules
+    environment:
+      - EMAIL_DOMAIN=marlon.echodek.co
+      - RAILS_MAX_THREADS=5
+      - CABLE_CHANNEL_PREFIX=standard_procedure_core
+      - SECRET_KEY_BASE=194731158c14b377088679fa848ffd5ac8e278d2f6c452bf3697b4e401237b28bef629d7252ad2586d9c937752e9388568fb620e830d3c340e1ab56ddb0fe44b
+      - RAILS_ENV=development
+      - HOSTNAME=localhost
+volumes:
+  bundle:
+  node_modules:
